@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500&family=Unbounded&display=swap" rel="stylesheet">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <title>Formulario</title>
+</head>
+<body>
+  <form action="https://sheetdb.io/api/v1/geet5kfyhbjmv" method="POST" id="sheetdb-form">
+    <img src="https://i.imgur.com/rIunli4.png" alt="photo" style="max-width: 100%; height: auto; margin-bottom: 0;">
+
+    <label for="nombre">Nombre:</label>
+    <select id="nombre" name="data[name]">
+      <option disabled selected>Seleccionar</option>
+      <option value="Klever C">Klever C.</option>
+      <option value="Juan P">Juan P.</option>
+      <option value="Steven Z">Steven Z.</option>
+      <option value="Juan D">Juan D.</option>
+      <option value="Eddy T">Eddy T.</option>
+      <option value="Cristhian M">Cristhian M.</option>
+      <option value="Ismael G">Ismael G..</option>
+      <option value="Freddy">Freddy C.</option>
+      <option value="Freddy C">Fabian P.</option>
+      <option value=">Jose R">Jose R.</option>
+    </select>
+<body>
+  <input type="hidden" name="data[timestamp]" id="timestamp">
+
+</body>
+    <input type="submit" name="submit" value="Enviar">
+  </form>
+  <script>
+  var form = document.getElementById('sheetdb-form');
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    var now = new Date();
+    var date = now.toLocaleDateString(); // get date string in local format
+    var time = now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}); // get time string in local format
+    var timestamp = date + ' ' + time; // combine date and time strings
+    document.getElementById("timestamp").value = timestamp; // set timestamp field value
+    var formData = new FormData(document.getElementById("sheetdb-form"));
+    fetch(form.action, {
+        method : "POST",
+        body: formData,
+    }).then(
+        response => response.json()
+    ).then((html) => {
+      // you can put any JS code here
+      alert('Gracias!')
+    });
+  });
+</script>
